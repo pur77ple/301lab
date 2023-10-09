@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+    <title>calculator</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <form class="calculator" name="calc">
+        <input class="value" type="text" name="text">
+        
+        <span class="number clr" onclick="clearInput()">AC</span>
+        <span class="number" onclick="deleteLastCharacter()">&larr;</span>
+        <span class="number" onclick="appendCharacter(event)">/</span>
+        <span class="number" onclick="appendCharacter(event)">*</span>
+        <span class="number" onclick="calculateTrigFunction('sin')">sin</span>
+        <span class="number" onclick="calculateTrigFunction('cos')">cos</span>
+        <span class="number" onclick="calculateTrigFunction('tan')">tan</span>
+        <span class="number" onclick="appendCharacter(event)">7</span>
+        <span class="number" onclick="appendCharacter(event)">8</span>
+        <span class="number" onclick="appendCharacter(event)">9</span>
+        <span class="number" onclick="appendCharacter(event)">-</span>
+        <span class="number" onclick="appendCharacter(event)">4</span>
+        <span class="number" onclick="appendCharacter(event)">5</span>
+        <span class="number" onclick="appendCharacter(event)">6</span>
+        <span class="number plus" onclick="appendCharacter(event)">+</span>
+        <span class="number" onclick="appendCharacter(event)">3</span>
+        <span class="number" onclick="appendCharacter(event)">2</span>
+        <span class="number" onclick="appendCharacter(event)">1</span>
+        <span class="number" onclick="appendCharacter(event)">0</span>
+        <span class="number" onclick="appendCharacter(event)">00</span>
+        <span class="number" onclick="appendCharacter(event)">.</span>
+        <span class="number equal" onclick="calculate()">=</span>
+        
+     
+    </form>   
+    
+    <script>
+        function calculate() {    //Handles computation operations and triggers this function when the user clicks the equal button.
+            var input = document.calc.text;
+            input.value = eval(input.value);
+        }
+        
+        function calculateTrigFunction(funcName) {  //Gets the value in the current input box as an Angle and converts it to radians. Keep the result four decimal places and update it into the input box
+            var input = document.calc.text;
+            var value = parseFloat(input.value);
+            var radians = value * (Math.PI / 180);
+            input.value = Math[funcName](radians).toFixed(4);
+        }
+        
+        function clearInput() {     //Used to clear the content in the input box
+            var input = document.calc.text;
+            input.value = '';
+        }
+        
+        function deleteLastCharacter() {       //Remove the last character
+            var input = document.calc.text;
+            input.value = input.value.slice(0, -1);
+        }
+        
+        function appendCharacter(event) {     //Append character
+            var input = document.calc.text;
+            var character = event.target.innerText;
+            input.value += character;
+        }
+    </script>
+</body>
+</html>
